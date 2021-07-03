@@ -1,0 +1,22 @@
+/node_modules
+/public/hot
+/public/storage
+<<<<<<< HEAD
+.user.ini
+error_log
+php.ini
+public/error_log
+public/products_img
+=======
+/public/products_img
+>>>>>>> 28285ad1a439a4bd0ded2328e8590a6324395cb2
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
