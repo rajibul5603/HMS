@@ -3,7 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Patient;
+use App\Models\Specialist;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Auth\Permission;
+use App\Models\Auth\Role;
+use App\Models\Auth\UserRole;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class AppointmentController extends Controller
 {
@@ -15,6 +28,21 @@ class AppointmentController extends Controller
     public function index()
     {
         //
+        if(Gate::allows('appointment.index')){
+            $code_name = Auth::user()->code_name;
+            $data['appointments'] = Appointment::where('code_name', $code_name)->get();
+
+            return view('dashboard.appointments.index',$data);
+          }
+          else{
+              if(Auth::check()){
+                  // abort(403);
+                  return view('errors.error403');
+              }
+              else{
+                  return redirect('login');
+              }
+          }
     }
 
     /**
@@ -25,7 +53,29 @@ class AppointmentController extends Controller
     public function create()
     {
         //
+        if(Gate::allows('appointment.create')){
+            $code_name = Auth::user()->code_name;
+            $data['appointments'] = Appointment::where('code_name', $code_name)->get();
+            $data['doctors'] = User::where('designation', 'doctor')->Where('code_name', $code_name)->get();
+            $data['specialists'] = Specialist::where('code_name', $code_name)->get();
+
+            $data['patients'] = Patient::where('code_name', $code_name)->get();
+
+            return view('dashboard.appointments.patients', $data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +86,22 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
+        if(Gate::allows('appointment.create')){
+
+          Appointment::create($request->all());
+
+           return redirect(route('appointment.index'))->with('success', 'appointment created Successfully!!!');
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
     }
 
     /**

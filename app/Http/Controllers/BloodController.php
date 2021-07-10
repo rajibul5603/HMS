@@ -28,17 +28,17 @@ class BloodController extends Controller
         if(Gate::allows('blood.index')){
             $data['bloods'] = Blood::all();
 
-        return view('dashboard.bloods.index',$data);
-        }
-        else{
-            if(Auth::check()){
-                // abort(403);
-                return view('errors.error403');
-            }
-            else{
-                return redirect('login');
-            }
-        }
+          return view('dashboard.bloods.index',$data);
+          }
+          else{
+              if(Auth::check()){
+                  // abort(403);
+                  return view('errors.error403');
+              }
+              else{
+                  return redirect('login');
+              }
+          }
     }
 
     /**
@@ -112,20 +112,20 @@ class BloodController extends Controller
      */
     public function edit(Blood $blood)
     {
-      if(Gate::allows('blood.edit')){
-          $data['blood'] = $blood;
-          // dd($data);
-          return view('dashboard.bloods.form',$data);
-      }
-      else{
-          if(Auth::check()){
-              // abort(403);
-              return view('errors.error403');
-          }
-          else{
-              return redirect('login');
-          }
-      }
+        if(Gate::allows('blood.edit')){
+            $data['blood'] = $blood;
+            // dd($data);
+            return view('dashboard.bloods.form',$data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+        }
     }
 
     /**

@@ -5,9 +5,10 @@ use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserApi;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\BloodController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,25 +54,34 @@ Route::get('api/productlastbrand', [ProductApi::class,'lastBrand'])->name('produ
 
 
 // Start Patients Route
-// Route::get('patients', [PatientsController::class,'index'])->name('patient.index');
-// Route::get('patient/create', [PatientsController::class,'create'])->name('patient.create');
-// Route::post('patients', [PatientsController::class,'store'])->name('patient.store');
-// Route::get('patient/{patient}/edit', [PatientsController::class,'edit'])->name('patient.edit');
-// Route::post('patient/update', [PatientsController::class,'update'])->name('patient.update');
-// Route::post('patient/destroy', [PatientsController::class,'destroy'])->name('patient.destroy');
+// Route::get('patients', [PatientController::class,'index'])->name('patient.index');
+// Route::get('patient/create', [PatientController::class,'create'])->name('patient.create');
+// Route::post('patients', [PatientController::class,'store'])->name('patient.store');
+// Route::get('patient/{patient}/edit', [PatientController::class,'edit'])->name('patient.edit');
+// Route::post('patient/update', [PatientController::class,'update'])->name('patient.update');
+// Route::post('patient/destroy', [PatientController::class,'destroy'])->name('patient.destroy');
 // End Patients Route
 
 // Start Blood route
 // Route::get('bloods', [BloodController::class,'index'])->name('blood.index');
 // Route::get('blood/create', [BloodController::class,'create'])->name('blood.create');
-// Route::post('bloods', [PatientsController::class,'store'])->name('blood.store');
+// Route::post('bloods', [PatientController::class,'store'])->name('blood.store');
 // Route::get('blood/{blood}/edit', [BloodController::class,'edit'])->name('blood.edit');
 // Route::post('blood/update', [BloodController::class,'update'])->name('blood.update');
 // Route::post('blood/destroy', [BloodController::class,'destroy'])->name('blood.destroy');
 // End Blood route
 
+// Start blood route
 Route::resource('blood', BloodController::class);
 Route::post('blood/{id}', [BloodController::class,'update'])->name('blood.update');
+// End blood route
 
-
+// Start room route
 Route::resource('room', RoomController::class);
+Route::post('room/{id}', [RoomController::class,'update'])->name('room.update');
+// End room route
+
+// Start appointment route
+Route::resource('appointment', AppointmentController::class);
+Route::post('appointment/{id}', [AppointmentController::class,'update'])->name('appointment.update');
+// End appointment route

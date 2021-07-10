@@ -124,6 +124,20 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+        if(Gate::allows('users.show')){
+            $data['users'] = $user;
+
+        return view('dashboard.users.show',$data);
+        }
+        else{
+            if(Auth::check()){
+                abort(403);
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
     }
 
     /**
@@ -135,6 +149,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        dd("wait for updating");
     }
 
     /**

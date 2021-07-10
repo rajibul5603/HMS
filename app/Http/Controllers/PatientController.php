@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patients;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Auth\Permission;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
 
-class PatientsController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class PatientsController extends Controller
         if(Gate::allows('patient.index')){
 
           $code_name = Auth::user()->code_name;
-          $data['patients'] = Patients::where('code_name', $code_name)->get();
+          $data['patients'] = Patient::where('code_name', $code_name)->get();
 
             return view('dashboard.patients.index', $data);
         }
@@ -55,7 +55,7 @@ class PatientsController extends Controller
       //
         if(Gate::allows('patient.create')){
 
-          $data['patient'] = Patients::all();
+          $data['patient'] = Patient::all();
 
             return view('dashboard.patients.form', $data);
         }
@@ -83,7 +83,7 @@ class PatientsController extends Controller
 
         if(Gate::allows('patient.create')){
 
-          Patients::create($request->all());
+          Patient::create($request->all());
 
           return redirect(route('patient.index'))->with('success', 'Patient created Successfully!!!');
         }
@@ -102,21 +102,22 @@ class PatientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patients  $patients
+     * @param  \App\Models\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function show(Patients $patients)
+    public function show(Patient $patients)
     {
         //
+        dd('show Successfully');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patients  $patients
+     * @param  \App\Models\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patients $patient)
+    public function edit(Patient $patient)
     {
         //
         if(Gate::allows('patient.edit')){
@@ -140,10 +141,10 @@ class PatientsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Patients  $patients
+     * @param  \App\Models\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patients $patient, $id=null)
+    public function update(Request $request, Patient $patient, $id=null)
     {
           //
           if(Gate::allows('blood.edit')){
@@ -152,7 +153,7 @@ class PatientsController extends Controller
                     'name' => 'required'
                   ]);
 
-                $patient = Patients::findOrFail($request->id);
+                $patient = Patient::findOrFail($request->id);
                 $patient->update($request->all());
 
                 return redirect(route('patient.index'))->with('success', 'Patient Successfully Updated');
@@ -172,10 +173,10 @@ class PatientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patients  $patients
+     * @param  \App\Models\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patients $patients)
+    public function destroy(Patient $patients)
     {
         //
     }

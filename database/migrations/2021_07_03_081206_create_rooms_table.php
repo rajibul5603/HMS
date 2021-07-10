@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('room_type')->nullable();
             $table->string('no_of_bad')->nullable();
             $table->string('price')->nullable();
-            $table->integer('status')->default(0);
+            $table->string('status')->nullable();
             $table->string('booking')->nullable();
             $table->string('reliesed')->nullable();
             $table->string('code_name')->nullable();

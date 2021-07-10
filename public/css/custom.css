@@ -28,3 +28,7 @@ html {
     --notify-icon-size: 32px;
     --notify-close-icon-size: 16px;
 }
+
+.hoverBt {
+    background: red !important;
+}

@@ -102,7 +102,7 @@ All Users | HMS
                             <td>{{($user->status !=0)? 'Active' :'Inactive'}}</td>
                             <td>
                                 @can('users.index')
-                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('users.show',$user->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                 @endcan
                                 @can('users.index')
                                 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pen"></i></a>

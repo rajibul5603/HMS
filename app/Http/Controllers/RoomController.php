@@ -70,6 +70,22 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         //
+        if(Gate::allows('room.create')){
+
+          Room::create($request->all());
+
+           return redirect(route('room.index'))->with('success', 'room created Successfully!!!');
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
     }
 
     /**
@@ -81,6 +97,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
+
     }
 
     /**
@@ -92,6 +109,20 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         //
+        if(Gate::allows('room.edit')){
+            $data['room'] = $room;
+            // dd($data);
+            return view('dashboard.rooms.form',$data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+        }
     }
 
     /**
@@ -104,6 +135,32 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         //
+        if(Gate::allows('room.edit')){
+
+          // $this->validate($request, [
+          //         'room' => 'required',
+          //         'stored_date' => 'required',
+          //         ],
+          //         [
+          //           'room.required' => 'Group fild is required',
+          //           'stored_date.required' => 'stored_date fild is required',
+          //         ]);
+
+              $room = Room::findOrFail($request->id);
+              $room->update($request->all());
+
+              return redirect(route('room.index'))->with('success', 'Room Successfully Updated!!!');
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
     }
 
     /**
