@@ -21,6 +21,13 @@ use App\Http\Controllers\AppointmentController;
 |
 */
 
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -73,15 +80,17 @@ Route::get('api/productlastbrand', [ProductApi::class,'lastBrand'])->name('produ
 
 // Start blood route
 Route::resource('blood', BloodController::class);
-Route::post('blood/{id}', [BloodController::class,'update'])->name('blood.update');
+Route::post('blood/{id}', [BloodController::class, 'update'])->name('blood.update');
 // End blood route
 
 // Start room route
 Route::resource('room', RoomController::class);
-Route::post('room/{id}', [RoomController::class,'update'])->name('room.update');
+Route::post('room/{id}', [RoomController::class, 'update'])->name('room.update');
 // End room route
 
 // Start appointment route
+
+Route::get('appointment/doctor', [AppointmentController::class, 'doctor'])->name('appointment.doctor');
+Route::post('appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
 Route::resource('appointment', AppointmentController::class);
-Route::post('appointment/{id}', [AppointmentController::class,'update'])->name('appointment.update');
 // End appointment route

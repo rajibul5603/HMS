@@ -45,6 +45,35 @@ class AppointmentController extends Controller
           }
     }
 
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function doctor()
+    {
+        // if(Gate::allows('appointment.doctor')){
+            $code_name = Auth::user()->code_name;
+            $id = Auth::user()->id;
+            $data['appointments'] = Appointment::where('user_id', $id)->where('code_name', $code_name)->get();
+
+            return view('dashboard.appointments.index',$data);
+          // }
+          // else{
+          //     if(Auth::check()){
+          //         // abort(403);
+          //         return view('errors.error403');
+          //     }
+          //     else{
+          //         return redirect('login');
+          //     }
+          // }
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -56,8 +85,9 @@ class AppointmentController extends Controller
         if(Gate::allows('appointment.create')){
             $code_name = Auth::user()->code_name;
             $data['appointments'] = Appointment::where('code_name', $code_name)->get();
-            $data['doctors'] = User::where('designation', 'doctor')->Where('code_name', $code_name)->get();
-            $data['specialists'] = Specialist::where('code_name', $code_name)->get();
+            $data['doctors'] = User::where('designation', 'Doctor')->Where('code_name', $code_name)->get();
+            $data['specialists'] = Specialist::all();
+            // $data['specialists'] = Specialist::where('code_name', $code_name)->get();
 
             $data['patients'] = Patient::where('code_name', $code_name)->get();
 

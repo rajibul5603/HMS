@@ -57,7 +57,7 @@
             <x-form.input.select id="designation" label="Designation" otherattr="required" class="form-control form-control-sm">
                 <option value="">Select</option>
                 @foreach ($roles as $role)
-                <option value="{{$role->id}}" {{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id : ""}}>{{$role->name}}</option>
+                <option value="{{$role->name}}" {{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id : ""}}>{{$role->name}}</option>
                 @endforeach
             </x-form.input.select>
         </div>

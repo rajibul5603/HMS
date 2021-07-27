@@ -34,7 +34,8 @@ class UserController extends Controller
         }
         else{
             if(Auth::check()){
-                abort(403);
+                // abort(403);
+                return view('errors.error403');
             }
             else{
                 return redirect('login');
@@ -60,7 +61,8 @@ class UserController extends Controller
         }
         else{
             if(Auth::check()){
-                abort(403);
+                // abort(403);
+                return view('errors.error403');
             }
             else{
                 return redirect('login');
@@ -131,7 +133,8 @@ class UserController extends Controller
         }
         else{
             if(Auth::check()){
-                abort(403);
+                // abort(403);
+                return view('errors.error403');
             }
             else{
                 return redirect('login');

@@ -26,7 +26,8 @@ class BloodController extends Controller
     {
         //
         if(Gate::allows('blood.index')){
-            $data['bloods'] = Blood::all();
+            $code_name = Auth::user()->code_name;
+            $data['bloods'] = Blood::where('code_name', $code_name)->get();
 
           return view('dashboard.bloods.index',$data);
           }
@@ -50,7 +51,8 @@ class BloodController extends Controller
     {
         //
         if(Gate::allows('blood.create')){
-            $data['bloods'] = Blood::all();
+          $code_name = Auth::user()->code_name;
+          $data['bloods'] = Blood::where('code_name', $code_name)->get();
             return view('dashboard.bloods.form',$data);
         }
         else{
