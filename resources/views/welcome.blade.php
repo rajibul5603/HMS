@@ -418,6 +418,7 @@
 
             <h1>Welcome to visit our site.</h1>
             <h1>"Hospital Mangemant System"</h1>
+            <h1>Added a new feature FontEnd</h1>
             <h3>This site hosted by testing purpose. this site now developing stage.</h3>
             <p>Username: <span>humayonkabir@gmail.com</span> <br>Password: 123456789
             </p>
