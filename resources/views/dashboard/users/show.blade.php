@@ -29,7 +29,7 @@
                             <div class="col-md-12 p-0">
                                 <div class="card-header">
                                     <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                        Collapsible Group Item #1
+                                        About
                                     </a>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-md-12 p-0">
                                 <div class="card-header">
                                     <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                        Collapsible Group Item #2
+                                        Appointment List
                                     </a>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="col-md-12 p-0">
                                 <div class="card-header">
                                     <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                                        Collapsible Group Item #3
+                                        Prescription
                                     </a>
                                 </div>
                             </div>

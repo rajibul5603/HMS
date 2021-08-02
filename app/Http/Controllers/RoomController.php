@@ -38,6 +38,58 @@ class RoomController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all_booking()
+    {
+        //
+        if(Gate::allows('room.all_booking')){
+
+          $code_name = Auth::user()->code_name;
+          $data['rooms'] = Room::where('code_name', $code_name)->where('booking', 'Yes')->get();
+
+            return view('dashboard.rooms.all_booking', $data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function booking()
+    {
+        //
+        dd('test Bookings');
+        if(Gate::allows('room.booking')){
+            $data['rooms'] = Room::all();
+            return view('dashboard.rooms.booking',$data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

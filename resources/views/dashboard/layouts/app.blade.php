@@ -77,22 +77,7 @@
                             Dashboard
                         </a>
                         @can('users.index')
-                        {{-- <div class="sb-sidenav-menu-heading">User Management</div> --}}
-                        {{-- Users --}}
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
-                            Users Management
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse {{(Route::currentRouteName()=='users.index' || Route::currentRouteName()=='users.create') ? 'show' :''}}" id="users" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{route('users.index')}}">All Users</a>
-                                @can('users.create')
-                                <a class="nav-link" href="{{route('users.create')}}">Add User</a>
-                                @endcan
 
-                            </nav>
-                        </div>
                         {{-- Roles --}}
                         @can('role.index')
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roles" aria-expanded="false" aria-controls="collapseLayouts">
@@ -110,11 +95,28 @@
                         </div>
                         @endcan
 
+                        {{-- <div class="sb-sidenav-menu-heading">User Management</div> --}}
+                        {{-- Users --}}
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                            Users Management
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse {{(Route::currentRouteName()=='users.index' || Route::currentRouteName()=='users.create') ? 'show' :''}}" id="users" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('users.index')}}">All Users</a>
+                                @can('users.create')
+                                <a class="nav-link" href="{{route('users.create')}}">Add User</a>
+                                @endcan
+
+                            </nav>
+                        </div>
+
                         @endcan
 
 
 
-                        {{(Route::currentRouteName()=='room.edit') ? 'show' :''}}
+                        {{-- {{(Route::currentRouteName()=='room.edit') ? 'show' :''}} --}}
 
                         @can('room.index')
                         {{-- <div class="sb-sidenav-menu-heading"> Appointment Management</div> --}}
@@ -125,8 +127,21 @@
                         </a>
                         <div class="collapse {{(Route::currentRouteName()=='room.index' || Route::currentRouteName()=='room.create') ? 'show' :''}}" id="rooms" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
+                                @can ('room.index')
                                 <a class="nav-link" href="{{route('room.index')}}">All Rooms</a>
+                                @endcan
+
+                                @can ('room.all_booking')
+                                <a class="nav-link" href="{{route('room.all_booking')}}">All Booking</a>
+                                @endcan
+
+                                @can ('room.booking')
+                                <a class="nav-link" href="{{route('room.booking')}}">Add Booking</a>
+                                @endcan
+
+                                @can ('room.create')
                                 <a class="nav-link" href="{{route('room.create')}}">Add Room</a>
+                                @endcan
                             </nav>
                         </div>
                         @endcan

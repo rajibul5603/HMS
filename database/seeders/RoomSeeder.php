@@ -15,6 +15,6 @@ class RoomSeeder extends Seeder
     public function run()
     {
         //
-        Room::insert(['room_no'=> '201', 'room_type'=> 'Non Ac', 'no_of_bad'=> '3', 'price'=>'150', 'code_name' => 'MHK', 'created_at'=>now()]);
+        Room::insert(['floor_name'=> '1st Floor', 'room_no'=> '201', 'room_type'=> 'Non Ac', 'no_of_bad'=> '3', 'booking'=> 'No', 'price'=>'150', 'code_name' => 'MHK', 'created_at'=>now()]);
     }
 }

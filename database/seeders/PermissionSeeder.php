@@ -61,6 +61,8 @@ class PermissionSeeder extends Seeder
         Permission::insert(['module_id' => '5', 'name' => 'Create Room','slug'=>'room.create', 'status' => 1]);
         Permission::insert(['module_id' => '5', 'name' => 'Edit Room','slug'=>'room.edit', 'status' => 1]);
         Permission::insert(['module_id' => '5', 'name' => 'Delete Room','slug'=>'room.destroy', 'status' => 1]);
+        Permission::insert(['module_id' => '5', 'name' => 'All Booking list','slug'=>'room.all_booking', 'status' => 1]);
+        Permission::insert(['module_id' => '5', 'name' => 'Booking','slug'=>'room.booking', 'status' => 1]);
 
         /** Emergency Management */
         Permission::insert(['module_id' => '6', 'name' => 'View Emergency','slug'=>'emergency.index', 'status' => 1]);

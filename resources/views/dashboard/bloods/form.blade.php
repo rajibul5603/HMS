@@ -58,6 +58,49 @@ Blood Form | HMS
             </div>
             </form>
         </div>
+
+
+        <div class="col-md-5 card" style="max-width: 1000px; margin: auto; padding: 10px 20px;">
+            <form enctype="multipart/form-data" @if (Route::currentRouteName()=='blood.edit') action="{{route('blood.update', $blood->id)}}" method="post"
+            @else action="{{route('blood.store')}}" method="post"
+            @endif >
+
+            @csrf
+
+            <input type="hidden" name="code_name" id="code_name" value="{{Auth::user()->code_name}}">
+
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <x-form.input.text id="doner_name" label="Doner Name" class="form-control form-control-sm" placeholder="Enter Your Doner Name" value="{{(isset($blood->stored_date) && $blood->stored_date!='')?$blood->stored_date :''}}" />
+                </div>
+
+                <div class="col-md-6">
+                    <x-form.input.text id="mobile" label="Mobile" class="form-control form-control-sm" placeholder="Enter Your Doner Mobile" value="{{(isset($blood->stored_date) && $blood->stored_date!='')?$blood->stored_date :''}}" />
+                </div>
+
+                <div class="col-md-6">
+                    <x-form.input.text id="father" label="Father Name" class="form-control form-control-sm" placeholder="Enter Your Father Name" value="{{(isset($blood->stored_date) && $blood->stored_date!='')?$blood->stored_date :''}}" />
+                </div>
+
+                <div class="col-md-6">
+                    <x-form.input.text id="mother" label="Mother Name" class="form-control form-control-sm" placeholder="Enter Your Mother Name" value="{{(isset($blood->stored_date) && $blood->stored_date!='')?$blood->stored_date :''}}" />
+                </div>
+
+                <div class="col-md-12">
+                    <x-form.input.text id="address" label="Address" class="form-control form-control-sm" placeholder="Enter Your Address" value="{{(isset($blood->stored_date) && $blood->stored_date!='')?$blood->stored_date :''}}" />
+                </div>
+
+            </div>
+
+            <div class="col-md-3 pr-0" style="float:right;">
+                <input id="submit" type="submit" class="form-control form-control-sm btn btn-success pt-0" value="submit">
+            </div>
+            </form>
+        </div>
+
+
     </div>
 </div>
 @endsection

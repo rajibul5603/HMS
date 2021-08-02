@@ -105,7 +105,7 @@ class RoleController extends Controller
             $data['role'] = $role;
             $data['modules'] = Module::all();
             $data['permissions'] = Permission::all();
-            return view('dashboard.roles.form',$data);
+            return view('dashboard.roles.form',$data)->with('success', 'appointment created Successfully!!!');
         }
         else{
             if(Auth::check()){
@@ -134,7 +134,7 @@ class RoleController extends Controller
         {
             RolePermission::create(['role_id'=>$id, 'permission_id'=>$permission]);
         }
-        return redirect(route('role.index'));
+        return redirect(route('role.index'))->with('success', 'Role update Successfully!!!');
     }
 
     /**

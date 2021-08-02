@@ -59,7 +59,7 @@ class AppointmentController extends Controller
             $id = Auth::user()->id;
             $data['appointments'] = Appointment::where('user_id', $id)->where('code_name', $code_name)->get();
 
-            return view('dashboard.appointments.index',$data);
+            return view('dashboard.appointments.doctor',$data);
           // }
           // else{
           //     if(Auth::check()){

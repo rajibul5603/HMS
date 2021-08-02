@@ -86,8 +86,8 @@ All Users | HMS
                             <th>Email</th>
                             <th>Role</th>
                             <th>Added At</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th style="text-align:center;">Status</th>
+                            <th style="text-align:center;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,16 +99,18 @@ All Users | HMS
                             <td>{{$user->email}}</td>
                             <td>{{(isset($user->userRole->role->name))?$user->userRole->role->name:"No Role"}}</td>
                             <td>{{$user->created_at}}</td>
-                            <td>{{($user->status !=0)? 'Active' :'Inactive'}}</td>
-                            <td>
+                            <td style="text-align:center;">
+                                <span style="color:white;" class="badge bg-{{($user->status !=0)? 'success' :'danger'}}">{{($user->status !=0)? 'Active' :'Inactive'}}</span>
+                            </td>
+                            <td style="text-align:center;">
                                 @can('users.index')
-                                <a href="{{route('users.show',$user->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('users.show',$user->id)}}" class="btn btn-sm btn-info" data-toggle="tooltip" title="View"><i class="fa fa-eye"></i></a>
                                 @endcan
                                 @can('users.index')
-                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pen"></i></a>
+                                <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fa fa-pen"></i></a>
                                 @endcan
                                 @can('users.index')
-                                <a href="{{route('users.destroy',$user->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{{route('users.destroy',$user->id)}}" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
                                 @endcan
 
                             </td>

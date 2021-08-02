@@ -20,31 +20,27 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
+                        <tr style="text-align:center;">
                             <th>SN.</th>
                             <th>Patient Name</th>
-                            <th>Doctor Name</th>
-                            <th>Appointment Date</th>
-                            <th>Appointment Time</th>
-                            <th>Action</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Reports</th>
+                            <th style="text-align:center;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- {{dd($appointments)}} --}}
                         @foreach ($appointments as $key=> $appointment )
-
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$appointment->patient->name}}</td>
-                            <td>{{$appointment->doctor->name}}</td>
-                            <td>{{$appointment->date}}</td>
-                            <td>{{$appointment->time}}</td>
-                            <td>
+                            <td> <a href="#">{{$appointment->patient->name}}</a> </td>
+                            <td>{{$appointment->patient->gender}}</td>
+                            <td style="text-align:center;">{{$appointment->patient->dob}}</td>
+                            <td style="text-align:center;"><a href="{{route('appointment.edit',$appointment->id)}}" class="btn btn-sm btn-info">View</a></td>
+                            <td style="text-align:center;">
                                 @can('appointment.index')
-                                <a href="{{route('appointment.edit',$appointment->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-                                @endcan
-                                @can('appointment.index')
-                                <a href="{{route('appointment.edit',$appointment->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pen"></i></a>
+                                <a href="{{route('appointment.edit',$appointment->id)}}" class="btn btn-sm btn-success">Prescrip</a>
                                 @endcan
                                 @can('appointment.index')
                                 <a href="{{route('appointment.destroy',$appointment->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

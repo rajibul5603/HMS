@@ -22,11 +22,6 @@ use App\Http\Controllers\AppointmentController;
 */
 
 
-Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
-    return "Cache is cleared";
-});
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -84,8 +79,10 @@ Route::post('blood/{id}', [BloodController::class, 'update'])->name('blood.updat
 // End blood route
 
 // Start room route
-Route::resource('room', RoomController::class);
 Route::post('room/{id}', [RoomController::class, 'update'])->name('room.update');
+Route::get('room/booking/all', [RoomController::class, 'all_booking'])->name('room.all_booking');
+Route::get('room/booking', [RoomController::class, 'booking'])->name('room.booking');
+Route::resource('room', RoomController::class);
 // End room route
 
 // Start appointment route

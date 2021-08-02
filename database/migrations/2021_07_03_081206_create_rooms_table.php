@@ -15,13 +15,13 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_no')->unique();
+            $table->string('floor_name');
+            $table->string('room_no');
             $table->string('room_type')->nullable();
             $table->string('no_of_bad')->nullable();
             $table->string('price')->nullable();
             $table->string('status')->nullable();
-            $table->string('booking')->nullable();
-            $table->string('reliesed')->nullable();
+            $table->string('booking')->default("No")();
             $table->string('code_name')->nullable();
             $table->string('entry_by')->nullable();
             $table->timestamps();
