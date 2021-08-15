@@ -2,22 +2,22 @@
 @section('main')
 <div class="container-fluid">
     <h1 class="mt-4">
-        @if (Route::currentRouteName()=='users.edit')Edit
+        @if (Route::currentRouteName()=='superuser.edit')Edit
         @else Add
         @endif User
     </h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
         <li class="breadcrumb-item active">
-            @if (Route::currentRouteName()=='users.edit')Edit
+            @if (Route::currentRouteName()=='superuser.edit')Edit
             @else Add
             @endif User
         </li>
 
     </ol>
     <div class="card" style="max-width: 1000px; margin: auto; padding: 10px 20px;">
-        <form id="userForm" @if (Route::currentRouteName()=='users.edit') action="{{route('user.update',$users->id)}}" method="post"
-        @else action="{{route('users.store')}}" method="post"
+        <form id="userForm" @if (Route::currentRouteName()=='superuser.edit') action="{{route('user.update',$users->id)}}" method="post"
+        @else action="{{route('superuser.store')}}" method="post"
         @endif >
         @csrf
         <div class="row">
@@ -28,7 +28,7 @@
                 <x-form.input.email id="email" label="Email" otherattr="required" class="form-control form-control-sm" placeholder="username@email.com" value="{{(isset($users->email) && $users->email !='')?$users->email :''}}"/>
             </div>
             <div class="col-md-4">
-                <x-form.input.text id="code_name" label="Code" otherattr="required pattern=[A-Z]{3} maxlength=3 tooltip= Unique&nbsp;3&nbsp;letter&nbsp;code" class="form-control form-control-sm" placeholder="ADM"
+                <x-form.input.text id="code_name" label="Code" otherattr="required pattern=[A-Z]{5} maxlength=5 tooltip= Unique&nbsp;5&nbsp;letter&nbsp;code" class="form-control form-control-sm" placeholder="CODES"
                   value="{{(isset($users->code_name) && $users->code_name!='')?$users->code_name :''}}" />
             </div>
             <div class="col-md-4">
@@ -48,53 +48,47 @@
                     <option value="Other">Other</option>
                 </x-form.input.select>
             </div>
+
+            <div class="col-md-4">
+                <x-form.input.text id="designation" label="Designation" otherattr="required" class="form-control form-control-sm " placeholder="Enter your designation"
+                  value="{{(isset($users->designation) && $users->designation !='')?$users->designation :''}}" />
+            </div>
+
+
+            <div class="col-md-4">
+                <x-form.input.currency id="salary" label="Salary" class="form-control form-control-sm" placeholder="Salary" value="{{(isset($users->salary) && $users->salary!='')?$users->salary :''}}" />
+            </div>
+            <div class="col-md-4">
+                <x-form.input.textarea id="education" label="Education (Short)" rows="5" class="form-control form-control-sm" placeholder="SSC, HSC" value="{{(isset($users->education) && $users->education!='')?$users->education :''}}" />
+            </div>
+            <div class="col-md-4">
+                <x-form.input.textarea id="permanent_address" label="Permanent Address" rows="5" class="form-control form-control-sm" placeholder="Permanent Address"
+                  value="{{(isset($users->permanent_address) && $users->permanent_address!='')?$users->permanent_address :''}}" />
+            </div>
+            <div class="col-md-4">
+                <x-form.input.textarea id="emergency_contact" label="Emergency Contact" rows="5" class="form-control form-control-sm" placeholder="Emergency Contact"
+                  value="{{(isset($users->emergency_contact) && $users->emergency_contact!='')?$users->emergency_contact :''}}" />
+            </div>
+
+            <div class="col-md-12">
+                <x-form.input.textarea id="remarks" label="Remarks" rows="8" class="form-control form-control-sm" placeholder="Remarks" value="{{(isset($users->remarks) && $users->remarks!='')?$users->remarks :''}}" />
+            </div>
+
+            <div class="col-md-12">
+                <x-form.input.select id="_role" label="Role" otherattr="required" class="form-control form-control-sm" value="{{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id :''}}">
+                    <option value="">Select</option>
+                    @foreach ($roles as $role)
+                    <option value="{{$role->id}}" {{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id : ""}}>{{$role->name}}</option>
+                    @endforeach
+                </x-form.input.select>
+            </div>
             {{-- <div class="col-md-4">
-                <x-form.input.text id="designation" label="Designation" otherattr="required" class="form-control form-control-sm" placeholder="Designation" value="{{(isset($users->designation) && $users->designation!='')?$users->designation :''}}"
+                <x-form.input.dropify id="_userimage" label="Profile Photo" class="form-control form-control-sm"  default="{{(isset($users->profile_photo_path) && $user->profile_photo_path !='')?asset('profile_img/'.$user->profile_photo_path):asset('img/defaultproduct.png')}}"
             />
         </div> --}}
-
-        <div class="col-md-4">
-            <x-form.input.select id="designation" label="Designation" otherattr="required" class="form-control form-control-sm">
-                <option value="">Select</option>
-                @foreach ($roles as $role)
-                <option value="{{$role->name}}" {{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id : ""}}>{{$role->name}}</option>
-                @endforeach
-            </x-form.input.select>
-        </div>
-
-        <div class="col-md-4">
-            <x-form.input.currency id="salary" label="Salary" class="form-control form-control-sm" placeholder="Salary" value="{{(isset($users->salary) && $users->salary!='')?$users->salary :''}}" />
-        </div>
-        <div class="col-md-4">
-            <x-form.input.textarea id="education" label="Education (Short)" rows="5" class="form-control form-control-sm" placeholder="SSC, HSC" value="{{(isset($users->education) && $users->education!='')?$users->education :''}}" />
-        </div>
-        <div class="col-md-4">
-            <x-form.input.textarea id="permanent_address" label="Permanent Address" rows="5" class="form-control form-control-sm" placeholder="Permanent Address"
-              value="{{(isset($users->permanent_address) && $users->permanent_address!='')?$users->permanent_address :''}}" />
-        </div>
-        <div class="col-md-4">
-            <x-form.input.textarea id="emergency_contact" label="Emergency Contact" rows="5" class="form-control form-control-sm" placeholder="Emergency Contact"
-              value="{{(isset($users->emergency_contact) && $users->emergency_contact!='')?$users->emergency_contact :''}}" />
-        </div>
-        <div class="col-md-12">
-            <x-form.input.textarea id="remarks" label="Remarks" rows="8" class="form-control form-control-sm" placeholder="Remarks" value="{{(isset($users->remarks) && $users->remarks!='')?$users->remarks :''}}" />
-        </div>
-
-        <div class="col-md-12">
-            <x-form.input.select id="_role" label="Role" otherattr="required" class="form-control form-control-sm" value="{{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id :''}}">
-                <option value="">Select</option>
-                @foreach ($roles as $role)
-                <option value="{{$role->id}}" {{(isset($users->userRole) && $users->userRole!='')?$users->userRole->id : ""}}>{{$role->name}}</option>
-                @endforeach
-            </x-form.input.select>
-        </div>
-        {{-- <div class="col-md-4">
-                <x-form.input.dropify id="_userimage" label="Profile Photo" class="form-control form-control-sm"  default="{{(isset($users->profile_photo_path) && $user->profile_photo_path !='')?asset('profile_img/'.$user->profile_photo_path):asset('img/defaultproduct.png')}}"
-        />
-    </div> --}}
-</div>
-<div class="col-md-4 text-center" style="margin: auto;"><input type="submit" class="btn btn-success" value="Submit"></div>
-</form>
+    </div>
+    <div class="col-md-4 text-center" style="margin: auto;"><input type="submit" class="btn btn-success" value="Submit"></div>
+    </form>
 
 </div>
 

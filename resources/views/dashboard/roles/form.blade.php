@@ -26,13 +26,10 @@
                 <x-form.input.text id="name" label="Name" otherattr="required" class="form-control " placeholder="Role Name" value="{{(isset($role->name) && $role->name !='')?$role->name :''}}" />
             </div>
             <div class="col-md-12">
-
                 <ul style="list-style: none">
-                    @foreach ($modules as $module)
+                    @foreach ($modules as $key => $module)
+                    @if ($key !=0)
                     <li>
-
-
-
                         <input type="checkbox" class="form-check-input" value="{{$module->id}}">
                         <label>
                             <h6> <strong>{{$module->name}}</strong> </h5>
@@ -40,7 +37,7 @@
 
 
                         <ul style="list-style: none" class="row">
-                            @foreach ($module->permissionList as $permission )
+                            @foreach ($module->permissionList as $key => $permission )
                             <li class="col-md-4">
                                 <input type="checkbox" class="form-check-input" id="permissions[]" name="permissions[]" value="{{$permission->id}}" @if (isset($role) &&
                                 $role->rolePermissions()->where("permission_id",$permission->id)->exists()))
@@ -50,10 +47,10 @@
                                         {{$permission->name}}
                                     </label>
                             </li>
-
                             @endforeach
                         </ul>
                     </li>
+                    @endif
                     @endforeach
                 </ul>
             </div>

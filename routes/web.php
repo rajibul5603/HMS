@@ -1,14 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\ProductApi;
+use App\Http\Controllers\Dashboard\SuperUserController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserApi;
+use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\BloodController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\TestNameController;
+use App\Http\Controllers\TestReportController;
+use App\Http\Controllers\CompanySetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +26,6 @@ use App\Http\Controllers\AppointmentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 
 Route::get('/', function () {
@@ -73,21 +78,53 @@ Route::get('api/productlastbrand', [ProductApi::class,'lastBrand'])->name('produ
 // Route::post('blood/destroy', [BloodController::class,'destroy'])->name('blood.destroy');
 // End Blood route
 
-// Start blood route
-Route::resource('blood', BloodController::class);
-Route::post('blood/{id}', [BloodController::class, 'update'])->name('blood.update');
-// End blood route
 
-// Start room route
-Route::post('room/{id}', [RoomController::class, 'update'])->name('room.update');
-Route::get('room/booking/all', [RoomController::class, 'all_booking'])->name('room.all_booking');
-Route::get('room/booking', [RoomController::class, 'booking'])->name('room.booking');
-Route::resource('room', RoomController::class);
-// End room route
+// super user
+Route::resource('superuser', SuperUserController::class);
+// end super user
 
-// Start appointment route
+// super user
+Route::post("company/{id}", [CompanySetupController::class,'update'])->name('company.update');
+Route::resource('company', CompanySetupController::class);
+// end super user
 
-Route::get('appointment/doctor', [AppointmentController::class, 'doctor'])->name('appointment.doctor');
-Route::post('appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
-Route::resource('appointment', AppointmentController::class);
-// End appointment route
+
+  Route::post("users/profile", [UserController::class,'imageUp'])->name('users.imageUp');
+  Route::post("user/{id}", [UserController::class,'update'])->name('user.update');
+  Route::resource('users', UserController::class);
+  Route::resource('role', RoleController::class);
+  Route::post("role/{id}", [RoleController::class,'update'])->name('role.update');
+  Route::post("users/{id}", [RoleController::class,'update'])->name('users.update');
+
+
+  Route::post("patient/profile", [UserController::class,'imageUp'])->name('patient.imageUp');
+  Route::post("patient/{id}", [PatientController::class,'update'])->name('patient.update');
+  Route::resource('patient', PatientController::class);
+
+  // Start blood route
+  Route::resource('blood', BloodController::class);
+  Route::post('blood/{id}', [BloodController::class, 'update'])->name('blood.update');
+  // End blood route
+
+  // Start room route
+  Route::post('room/{id}', [RoomController::class, 'update'])->name('room.update');
+  Route::get('room/booking/all', [RoomController::class, 'all_booking'])->name('room.all_booking');
+  Route::get('room/booking', [RoomController::class, 'booking'])->name('room.booking');
+  Route::resource('room', RoomController::class);
+  // End room route
+
+  // Start appointment route
+  Route::post('appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
+  Route::resource('appointment', AppointmentController::class);
+  // End appointment route
+
+  // Start Test & rePort route
+  // Route::post('appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
+    Route::resource('testname', TestNameController::class);
+  // End appointment route
+
+
+  // Start Test & rePort route
+  // Route::post('appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
+  Route::resource('testreport', TestReportController::class);
+  // End appointment route

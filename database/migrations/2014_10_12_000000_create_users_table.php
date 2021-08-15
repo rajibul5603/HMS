@@ -33,6 +33,9 @@ class CreateUsersTable extends Migration
             $table->text('remarks')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->integer('status')->default(1);
+            $table->string('ip')->nullable();
+            $table->string('mac')->nullable();
+            $table->text('divice')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

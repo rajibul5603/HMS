@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Auth\UserRole;
 use Illuminate\Database\Seeder;
 
-class UserRoleSeeder extends Seeder
+class TestReportSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +14,5 @@ class UserRoleSeeder extends Seeder
     public function run()
     {
         //
-        UserRole::insert(['user_id'=> '1', 'role_id'=> '1',]);
-        UserRole::insert(['user_id'=> '2', 'role_id'=> '3',]);
     }
 }

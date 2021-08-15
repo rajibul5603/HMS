@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RoomBookingSeeder extends Seeder
+class TestNameSeeder extends Seeder
 {
     /**
      * Run the database seeds.

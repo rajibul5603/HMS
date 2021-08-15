@@ -164,6 +164,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -178,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -233,6 +236,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Countries' => Webpatser\Countries\CountriesFacade::class,
 
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

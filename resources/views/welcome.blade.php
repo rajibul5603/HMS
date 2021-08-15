@@ -416,13 +416,17 @@
 
         <div style="color:wheat;" class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
-            <h1>Welcome to visit our site.</h1>
-            <h1>"Hospital Mangemant System"</h1>
-            <h1>Added a new feature FontEnd</h1>
-            <h3>This site hosted by testing purpose. this site now developing stage.</h3>
-            <p>Username: <span>humayonkabir@gmail.com</span> <br>Password: 123456789
+            <h3 style="margin:0px;">Welcome</h3>
+            <h1 style="margin:0px;">eHospital Mangemant System</h1>
+            <h2 style="margin:0px;">Jonaki Soft Network</h2>
+            <br><br>
+            <p>
+                Contact Us: <br>
+                E-mail: <span>iam.jonakisoft.net@gmail.com,</span> <span>info@jonakisoft.net</span> <br>
+                                Mobile: +880 1794899422, +880 1766169534
             </p>
-            <h4>Please <span><a href="{{ route('login') }}" class="text-sm text-gray-700 underline" style="Color:blue; size:15px"> Login </a> </span> and feedback </h4>
+            <h3>Website: <a href="https://jonakisoft.net/" target="_blank">jonakisoft.net</a> </h3>
+
         </div>
     </div>
 </body>

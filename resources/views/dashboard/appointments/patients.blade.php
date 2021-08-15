@@ -31,6 +31,7 @@ Patient List | HMS
                             <th>Mobile</th>
                             <th>Blood</th>
                             <th>Gender</th>
+                            <th>Age</th>
                             <th>Religion</th>
                             <th style="width:50px;">Action</th>
                         </tr>
@@ -43,8 +44,9 @@ Patient List | HMS
                             <td style="text-align:center">{{$key+1}}</td>
                             <td>{{$patient->name}}</td>
                             <td>{{$patient->mobile}}</td>
-                            <td>{{$patient->appointment}}</td>
+                            <td>{{$patient->blood}}</td>
                             <td>{{$patient->gender}}</td>
+                            <td>{{$patient->dob}}</td>
                             <td>{{$patient->religion}}</td>
                             <td style="text-align:center">
                                 <!-- Button trigger modal -->
@@ -79,19 +81,12 @@ Patient List | HMS
                                                 {{-- <input type="hidden" name="id" id="id" value="{{Auth::id()}}"> --}}
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="patient_name">Patient Name</label>
-                                                            <input type="email" class="form-control form-control-sm" id="patient_name" value="{{$patients[$key]->name}}" readonly>
+                                                            <h5> <span style="color: red;">{{$patients[$key]->name}}</span> | {{$patients[$key]->mobile}}</h5>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="patient_name">Patient Mobile</label>
-                                                            <input type="email" class="form-control form-control-sm" id="patient_name" value="{{$patients[$key]->mobile}}" readonly>
-                                                        </div>
-                                                    </div>
 
 
                                                     <div class="col-md-6">

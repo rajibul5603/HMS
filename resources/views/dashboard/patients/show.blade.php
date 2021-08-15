@@ -2,11 +2,10 @@
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('css/dropify.css') }}">
-
 @endpush
 
 @section('title')
-{{$user->name}} | HMS
+{{$patient->name}} | HMS
 @endsection
 @section('main')
 
@@ -15,8 +14,7 @@
     {{-- <h1 class="mt-4">Users</h1> --}}
     <ol class="breadcrumb mb-4 mt-4">
         <li class="breadcrumb-item active">Dashboard</li>
-        <li class="breadcrumb-item active">{{$user->name}}</li>
-
+        <li class="breadcrumb-item active">{{$patient->name}}</li>
     </ol>
 
     <div class="row">
@@ -28,15 +26,17 @@
                 </div>
                 <div class="container mt-4">
                     <div class="row">
-                        <form class="col-md-12" action="{{route('users.imageUp')}}" method="post" enctype="multipart/form-data">
+                        <form class="col-md-12" action="{{route('patient.imageUp')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="file" class="dropify" data-default-file="{{asset('images/profile/avater.png')}}" data-height="250" id="img" name="profile_img" />
 
                             <input type="submit" class="btn btn-sm btn-success col-md-12" value="Save Profile">
-                            {{-- <a class="btn btn-sm btn-success" href="{{route('users.edit',$user->id)}}">Edit Details</a> --}}
+                            {{-- <a class="btn btn-sm btn-success" href="{{route('users.edit',$patient->id)}}">Edit Details</a> --}}
                         </form>
 
-                        <div id="accordion" class="row mt-4">
+                        <p class="col-md-12 mt-3 ml-2">Patient id: <strong>#000{{$patient->id}}</strong> </p>
+                        <p class="col-md-12 ml-2">Mobile: <strong>{{$patient->mobile}}</strong> </p>
+                        <div id="accordion" class="row mt-2">
                             <div class="col-md-12 p-0">
                                 <div class="card-header">
                                     <a class="card-link" onclick="about();" href="#">
@@ -73,8 +73,8 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-users mr-1"></i>
-                    Profile About
-                    {{-- <a href="#" class="btn btn-sm btn-primary" style="float: right;"><i class="fa fa-plus-circle"></i> Edit Profile</a> --}}
+                    {{$patient->name}} info
+                    <a href="#" class="btn btn-sm btn-primary" style="float: right;"><i class="fa fa-plus-circle"></i>Add Appointment</a>
                 </div>
                 <div class="body">
                     <div class="container mt-4">
@@ -86,79 +86,103 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width: 20%;">Name</th>
-                                                <td>: {{$user->name}}</td>
+                                                <td>: {{$patient->name}}</td>
+                                                <th>Mobie</th>
+                                                <td>: {{$patient->mobile}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Email</th>
-                                                <td>: {{$user->email}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Birth of Date</th>
-                                                <td>: {{$user->dob}}</td>
-                                            </tr>
-                                            <tr>
+                                                <td>: {{$patient->gmail}}</td>
                                                 <th>Gender</th>
-                                                <td>: {{$user->gender}}</td>
+                                                <td>: {{$patient->gender}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Designation</th>
-                                                <td>: {{$user->designation}}</td>
+                                                <th>Blood</th>
+                                                <td>: {{$patient->blood}}</td>
+                                                <th>dob</th>
+                                                <td>: {{$patient->dob}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Salary</th>
-                                                <td>: {{$user->salary}}</td>
+                                                <th>Occupation</th>
+                                                <td>: {{$patient->occupation}}</td>
+                                                <th>Religion</th>
+                                                <td>: {{$patient->religion}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Marital</th>
+                                                <td>: {{$patient->marital}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Education</th>
-                                                <td>: {{$user->education}}</td>
+                                                <th>Address</th>
+                                                <td>: {{$patient->address}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Permanent Address</th>
-                                                <td>: {{$user->permanent_address}}</td>
+                                                <th>Relative Contact</th>
+                                                <td>: {{$patient->relative_contact}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Emergency Contact</th>
-                                                <td>: {{$user->emergency_contact}}</td>
+                                                <th>Refarence by</th>
+                                                <td>: {{$patient->refer}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Entry by</th>
+                                                <td>: {{$patient->entry_by}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <p style="float: right;">
-                                        <a class="btn btn-sm btn-success" href="{{route('users.edit',$user->id)}}">Edit Details</a>
-                                        <a class="btn btn-sm btn-success" href="#">Print</a>
+                                        <a class="btn btn-sm btn-success" href="{{route('patient.edit',$patient->id)}}">Edit Details</a>
+                                        <a class="btn btn-sm btn-success" onclick="window.print()" href="#">Print</a>
+                                        {{-- <button type="button" name="button"></button> --}}
                                     </p>
 
                                 </div>
 
                                 <div id="two" class="collapse" data-parent="#accordion">
-                                    <p>
-                                    <h1>Two</h1>
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    </p>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr style="text-align: center;">
+                                                    <th style="width:10px!important;">SN.</th>
+                                                    <th>Doctor</th>
+                                                    <th>Specialist</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- {{dd($appointments)}} --}}
+                                                @foreach ($appointments as $key=> $appointment )
+
+                                                <tr>
+                                                    <td>{{$key+1}}</td>
+                                                    <td>
+                                                        @can('users.index')
+                                                        <a href="{{route('users.show',$appointment->doc->id)}}">{{$appointment->doc->name}}</a>
+                                                        @endcan
+                                                    </td>
+                                                    <td>{{$appointment->specialist}}</td>
+                                                    <td>{{$appointment->date}}</td>
+                                                    <td><span class="badge badge-success">visited</span></td>
+                                                    <td style="text-align: center;">
+                                                        @can('appointment.index')
+                                                        <a href="#{{route('appointment.edit',$appointment->id)}}" class="btn btn-sm btn-info">Report</a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
 
                                 <div id="three" class="collapse" data-parent="#accordion">
                                     <p>
-                                    <h1>Three</h1>
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    salkjfdlkjcxb cxv cxb ccxbxcbxc bxcvb cxbvcxbcbcb bccbcbbxbxcb xcvbx f aslkjfasl jfak fjaslkfj askf safas fja sfjasbr
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
-                                    bvx bcxb df cbvbcxbcxcxvb cxbvcxbcxb cxb xcbcxb cxbv cbcxvc bxcbcxbcxvxxdjsakl faskfj aslkfjasklf askjl
+                                    <h1>Prescription empty</h1>
                                     </p>
                                 </div>
 

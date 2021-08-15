@@ -39,7 +39,7 @@
 <body class="sb-nav-fixed">
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{route('dashboard')}}">HMS</a>
+        <a class="navbar-brand" href="{{route('dashboard')}}">eMedical System</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         {{-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -76,8 +76,31 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        @can('users.index')
 
+                        @can ('superuser.index')
+                        {{-- <div class="sb-sidenav-menu-heading">User Management</div> --}}
+                        {{-- Users --}}
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#superuser" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                            Super Users
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse {{(Route::currentRouteName()=='superuser.index' || Route::currentRouteName()=='superuser.create') ? 'show' :''}}" id="superuser" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('superuser.index')}}">All Users</a>
+                                @can('superuser.create')
+                                <a class="nav-link" href="{{route('superuser.create')}}">Add User</a>
+                                @endcan
+                                @can('superuser.index')
+                                <a class="nav-link" href="{{route('company.index')}}">Company Setup</a>
+                                @endcan
+
+                            </nav>
+                        </div>
+                        @endcan
+
+
+                        @can('users.index')
                         {{-- Roles --}}
                         @can('role.index')
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roles" aria-expanded="false" aria-controls="collapseLayouts">
@@ -188,7 +211,23 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{route('appointment.index')}}">All Appointment</a>
                                 <a class="nav-link" href="{{route('appointment.create')}}">Add Appointment</a>
-                                <a class="nav-link" href="{{route('appointment.doctor')}}">Appointment</a>
+                            </nav>
+                        </div>
+                        @endcan
+
+
+                        @can('testreport.index')
+                        {{-- <div class="sb-sidenav-menu-heading"> Appointment Management</div> --}}
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#testreports" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                            Test & Report
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse {{(Route::currentRouteName()=='testreport.index' || Route::currentRouteName()=='testreport.create') ? 'show' :''}}" id="testreports" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('testreport.index')}}">All Test List</a>
+                                <a class="nav-link" href="{{route('testreport.index')}}">All Test & Reports</a>
+                                <a class="nav-link" href="{{route('testreport.create')}}">Add Test & Report</a>
                             </nav>
                         </div>
                         @endcan

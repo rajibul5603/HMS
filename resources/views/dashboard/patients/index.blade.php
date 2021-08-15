@@ -50,7 +50,7 @@ Patient List | HMS
 
                             <td>
                                 @can('patient.index')
-                                <a href="{{route('patient.edit',$patient->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('patient.show', $patient->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                 @endcan
                                 @can('patient.index')
                                 <a href="{{route('patient.edit',$patient->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pen"></i></a>

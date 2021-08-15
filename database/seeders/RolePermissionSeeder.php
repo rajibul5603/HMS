@@ -18,7 +18,7 @@ class RolePermissionSeeder extends Seeder
         //
 
         foreach (Permission::all() as $key => $permission) {
-            RolePermission::insert(['role_id'=> '2', 'permission_id'=> $permission->id]);
+            RolePermission::insert(['role_id'=> '1', 'permission_id'=> $permission->id]);
         }
         RolePermission::insert(['role_id'=> '3', 'permission_id'=> '1', ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanySetup;
 use App\Models\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -16,8 +17,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
-
-class UserController extends Controller
+class SuperUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class UserController extends Controller
         if(Gate::allows('users.index')){
             $data['users'] = User::where('status',1)->get();
 
-        return view('dashboard.users.index',$data);
+        return view('dashboard.superuser.index', $data);
         }
         else{
             if(Auth::check()){
@@ -42,7 +42,6 @@ class UserController extends Controller
             }
 
         }
-
     }
 
     /**
@@ -58,7 +57,7 @@ class UserController extends Controller
             $data['roles'] = Role::all();
 
 
-            return view('dashboard.users.form',$data);
+            return view('dashboard.superuser.form',$data);
         }
         else{
             if(Auth::check()){
@@ -70,8 +69,8 @@ class UserController extends Controller
             }
 
         }
-
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -83,10 +82,6 @@ class UserController extends Controller
     {
         //
         if(Gate::allows('users.create')){
-
-          // $this->validate($request, [
-          //         'email' => 'unique',
-          //         ]);
             $request->merge([
                 'password' => Hash::make($request->_password),
                 'ip' => request()->ip(),
@@ -96,51 +91,26 @@ class UserController extends Controller
 
 
          $last = User::create($request->all());
+         CompanySetup::create(["user_id" => $last->id, "code_name" => $last->code_name]);
          UserRole::create(["user_id"=>$last->id, "role_id"=> $role]);
-         return redirect(route('users.index'))->with('success', 'User created Successfully!!!');
+         return redirect(route('dashboard.company.index'))->with('success', 'User created Successfully!!! Now Company Setup!!!');
         }
     }
 
-    public function imageUp(Request $request)
-    {
 
-      if($file = $request->file('_profile_img')) {
-          $filename =  $request->code. '.' . $file->getClientOriginalExtension();
-          $directory = (Storage::path("images/profile"));
-          $location = (Storage::path("images/profile/"));
-          $link = $filename;
-          dd($directory);
-          if(!File::exists($directory)){
-              File::makeDirectory($directory, 0755, true, true);
-          }
-          // $file->move($directory,$filename);
-          // Image::make($file)->save($location);
-          /* Resize and save image */
-          Image::make($file)->resize(800, 800, function ($constraint) {
-              $constraint->aspectRatio();
-              $constraint->upsize();
-          })->save($location.'/'.$filename);
-
-          $user = Auth::User();
-          $user->profile_photo_path = $link;
-          $user->save();
-          dd("boos done!");
-      }
-
-    }
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\SuperUser  $superUser
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(SuperUser $superUser)
     {
         //
         if(Gate::allows('users.show')){
-            $data['user'] = $user;
+            $data['user'] = $superUser;
 
-        return view('dashboard.users.show',$data);
+        return view('dashboard.superuser.show',$data);
         }
         else{
             if(Auth::check()){
@@ -157,17 +127,17 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\SuperUser  $superUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(SuperUser $superUser)
     {
         //
         if(Gate::allows('users.edit')){
-            $data['users'] = $user;
+            $data['users'] = $superUser;
             $data['roles'] = Role::all();
 
-            return view('dashboard.users.form',$data);
+            return view('dashboard.superuser.form',$data);
         }
         else{
             if(Auth::check()){
@@ -185,10 +155,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\SuperUser  $superUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role, $id=null)
+    public function update(Request $request, SuperUser $superUser)
     {
         //
         if(Gate::allows('users.edit')){
@@ -200,7 +170,7 @@ class UserController extends Controller
               $patient = User::findOrFail($request->id);
               $patient->update($request->all());
 
-              return redirect(route('users.index'))->with('success', 'User Successfully Updated');
+              return redirect(route('superuser.index'))->with('success', 'User Successfully Updated');
         }
         else{
             if(Auth::check()){
@@ -217,10 +187,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\SuperUser  $superUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(SuperUser $superUser)
     {
         //
     }

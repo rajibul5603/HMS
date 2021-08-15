@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Auth\Permission;
@@ -105,10 +106,53 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patients)
+    public function show(Patient $patient)
     {
         //
-        dd('show Successfully');
+        if(Gate::allows('patient.show')){
+            $data['patient'] = $patient;
+            $data['appointments'] = Appointment::where('patient_id', ($patient->id))->get();
+
+        return view('dashboard.patients.show',$data);
+        }
+        else{
+            if(Auth::check()){
+                // abort(403);
+                return view('errors.error403');
+            }
+            else{
+                return redirect('login');
+            }
+
+        }
+    }
+
+    public function imageUp(Request $request)
+    {
+
+      if($file = $request->file('_profile_img')) {
+          $filename =  $request->code. '.' . $file->getClientOriginalExtension();
+          $directory = (Storage::path("images/profile"));
+          $location = (Storage::path("images/profile/"));
+          $link = $filename;
+          dd($directory);
+          if(!File::exists($directory)){
+              File::makeDirectory($directory, 0755, true, true);
+          }
+          // $file->move($directory,$filename);
+          // Image::make($file)->save($location);
+          /* Resize and save image */
+          Image::make($file)->resize(800, 800, function ($constraint) {
+              $constraint->aspectRatio();
+              $constraint->upsize();
+          })->save($location.'/'.$filename);
+
+          $user = Auth::User();
+          $user->profile_photo_path = $link;
+          $user->save();
+          dd("boos done!");
+      }
+
     }
 
     /**

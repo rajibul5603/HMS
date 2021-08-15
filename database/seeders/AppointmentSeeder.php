@@ -15,6 +15,6 @@ class AppointmentSeeder extends Seeder
     public function run()
     {
         //
-        Appointment::insert(['patient_id'=> '1', 'user_id'=> '1', 'date'=> '3.07.2021', 'time'=>'01:50',  'fees'=>'1050', 'code_name' => 'MHK', 'created_at'=>now()]);
+        Appointment::insert(['patient_id'=> '1', 'user_id'=> '1', 'specialist'=> 'Nak kan gola', 'doctor'=> 'Bala Kumar', 'date'=> '3.07.2021', 'time'=>'01:50',  'fees'=>'1050', 'code_name' => 'MHK', 'created_at'=>now()]);
     }
 }

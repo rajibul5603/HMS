@@ -18,7 +18,7 @@ All Users | HMS
         <div class="card-header">
             <i class="fa fa-users mr-1"></i>
             Users
-            <a href="{{route('users.create')}}" class="btn btn-sm btn-primary" style="float: right;"><i class="fa fa-plus-circle"></i> Add User</a>
+            <a href="{{route('superuser.create')}}" class="btn btn-sm btn-primary" style="float: right;"><i class="fa fa-plus-circle"></i> Add User</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

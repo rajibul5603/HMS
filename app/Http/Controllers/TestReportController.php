@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use App\Models\TestReport;
 use App\Models\Patient;
-use App\Models\Specialist;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Auth\Permission;
@@ -18,7 +16,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
-class AppointmentController extends Controller
+class TestReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,11 +26,11 @@ class AppointmentController extends Controller
     public function index()
     {
         //
-        if(Gate::allows('appointment.index')){
-            $code_name = Auth::user()->code_name;
-            $data['appointments'] = Appointment::where('code_name', $code_name)->get();
+        if(Gate::allows('testreport.index')){
 
-            return view('dashboard.appointments.index', $data);
+          $method1 = request()->ip();
+            dd("onkdashfss");
+            return view('dashboard.testreport.index', $data);
           }
           else{
               if(Auth::check()){
@@ -45,9 +43,6 @@ class AppointmentController extends Controller
           }
     }
 
-
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -56,15 +51,11 @@ class AppointmentController extends Controller
     public function create()
     {
         //
-        if(Gate::allows('appointment.create')){
+        if(Gate::allows('testreport.create')){
             $code_name = Auth::user()->code_name;
-            $data['appointments'] = Appointment::where('code_name', $code_name)->get();
-            $data['doctors'] = User::where('designation', 'Doctor')->Where('code_name', $code_name)->get();
-            $data['specialists'] = Specialist::all();
-
             $data['patients'] = Patient::where('code_name', $code_name)->get();
 
-            return view('dashboard.appointments.patients', $data);
+            return view('dashboard.testreport.patients', $data);
         }
         else{
             if(Auth::check()){
@@ -77,8 +68,6 @@ class AppointmentController extends Controller
 
         }
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -89,31 +78,15 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
-        if(Gate::allows('appointment.create')){
-
-          Appointment::create($request->all());
-
-           return redirect(route('appointment.index'))->with('success', 'appointment created Successfully!!!');
-        }
-        else{
-            if(Auth::check()){
-                // abort(403);
-                return view('errors.error403');
-            }
-            else{
-                return redirect('login');
-            }
-
-        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Appointment  $appointment
+     * @param  \App\Models\TestReport  $testReport
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show(TestReport $testReport)
     {
         //
     }
@@ -121,10 +94,10 @@ class AppointmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Appointment  $appointment
+     * @param  \App\Models\TestReport  $testReport
      * @return \Illuminate\Http\Response
      */
-    public function edit(Appointment $appointment)
+    public function edit(TestReport $testReport)
     {
         //
     }
@@ -133,10 +106,10 @@ class AppointmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
+     * @param  \App\Models\TestReport  $testReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Request $request, TestReport $testReport)
     {
         //
     }
@@ -144,10 +117,10 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Appointment  $appointment
+     * @param  \App\Models\TestReport  $testReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(TestReport $testReport)
     {
         //
     }

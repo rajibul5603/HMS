@@ -39,7 +39,7 @@ Patient Form | HMS
             </div>
 
             <div class="col-md-4">
-                <x-form.input.text id="mobile" label="Mobile" otherattr="required pattern=[0-9]{11} maxlength=11" class="form-control form-control-sm" placeholder="Patient Mobile" value="{{(isset($patient->mobile)!='')?$patient->mobile :''}}" />
+                <x-form.input.number id="mobile" label="Mobile" otherattr="required pattern=[0-9]{11} maxlength=11" class="form-control form-control-sm" placeholder="Patient Mobile" value="{{(isset($patient->mobile)!='')?$patient->mobile :''}}" />
             </div>
 
             <div class="col-md-4">
@@ -110,7 +110,7 @@ Patient Form | HMS
                         </x-form.input.select>
                     </div>
                     <div class="col-md-12">
-                        <x-form.input.text id="relative_contact" label="Emergency Contact for Relative" pattern=[0-9]{11} maxlength=11 class="form-control form-control-sm" placeholder="Mobile Number for emergency contact"
+                        <x-form.input.number id="relative_contact" label="Emergency Contact for Relative" pattern=[0-9]{11} maxlength=11 class="form-control form-control-sm" placeholder="Mobile Number for emergency contact"
                           value="{{(isset($patient->relative_contact)!='')?$patient->relative_contact :''}}" />
                     </div>
                 </div>

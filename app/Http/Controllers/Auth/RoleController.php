@@ -71,13 +71,12 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
-
-
         $role = Role::create(['name'=>$request->name, 'slug'=>str_replace(' ','_',$request->name), 'status'=>1]);
         foreach($request->permissions as $permission)
         {
             RolePermission::create(['role_id'=>$role->id, 'permission_id'=>$permission]);
         }
+        return redirect(route('role.index'))->with('success', 'Role created Successfully!!!');
     }
 
     /**

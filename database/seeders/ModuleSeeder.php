@@ -15,7 +15,9 @@ class ModuleSeeder extends Seeder
     public function run()
     {
         //
+        Module::insert(['name'=>'Super User Management']);
         Module::insert(['name'=>'User Management']);
+        Module::insert(['name'=>'Roles Management']);
         Module::insert(['name'=>'Patients Management']);
         Module::insert(['name'=>'Appointment Management']);
         Module::insert(['name'=>'Blood Management']);
@@ -26,5 +28,6 @@ class ModuleSeeder extends Seeder
         Module::insert(['name'=>'Billing Management']);
         Module::insert(['name'=>'Laboratory Management']);
         Module::insert(['name'=>'Setting Management']);
+        Module::insert(['name'=>'Test Name Management']);
     }
 }
